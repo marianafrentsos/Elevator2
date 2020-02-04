@@ -1,0 +1,69 @@
+.elevatorsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+  width: 100%;
+  color: white;
+  position: relative;
+}
+.elevatorA {
+  order: 1;
+}
+
+.elevatorB {
+  order: 3;
+}
+.elevatorA,
+.elevatorB {
+  align-self: center;
+  background-color: black;
+  width: 18%;
+  margin: 50px;
+  border: 1px solid white;
+  padding: 10px;
+  border-radius: 15px;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.elevatorBtns {
+  width: 50%;
+  left: 20%;
+  position: relative;
+}
+.elevatorA button,
+.elevatorB button {
+  margin: 10px;
+  padding: 0.4em;
+  background-color: black;
+  border: white;
+  color: white;
+}
+
+.floorsContainer {
+  order: 2;
+  margin: 20px 0px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  width: 25%;
+
+  background: radial-gradient(
+    ellipse at center,
+    rgba(125, 126, 125, 1) 0%,
+    rgba(14, 14, 14, 1) 100%
+  );
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.arrowsContainer {
+  position: relative;
+  align-self: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
