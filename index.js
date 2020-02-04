@@ -17,7 +17,7 @@ class Lift {
   }
 
   handleShow = (display, currentFloor) => {
-    display.innerText = "This elevator is at floor " + currentFloor;
+    display.innerText = "This elevator is on floor " + currentFloor;
   };
 
   handleArrows = reqFloor => {
@@ -168,9 +168,9 @@ class Lift {
   handleDirectionDown = () => {
     pointDown.forEach(element => {
       if (elevatorA.direction === "down" || elevatorB.direction === "down") {
-        element.style.background = "orange";
+        element.classList.add("active");
       } else {
-        element.style.background = "none";
+        element.classList.remove("active");
       }
     });
   };
@@ -178,9 +178,9 @@ class Lift {
   handleDirectionUp = () => {
     pointUp.forEach(element => {
       if (elevatorA.direction === "up" || elevatorB.direction === "up") {
-        element.style.background = "orange";
+        element.classList.add("active");
       } else {
-        element.style.background = "none";
+        element.classList.remove("active");
       }
     });
   };
