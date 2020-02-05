@@ -5,7 +5,9 @@
   width: 100%;
   color: white;
   position: relative;
+  top: 100px;
 }
+
 .elevatorA {
   order: 1;
 }

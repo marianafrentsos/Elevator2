@@ -2,12 +2,18 @@ let pointDown = document.querySelectorAll(".fa-arrow-down");
 let pointUp = document.querySelectorAll(".fa-arrow-up");
 let displayAtext = document.getElementById("displayA");
 let displayBtext = document.getElementById("displayB");
+let activeA = document.getElementsByClassName("pressA active");
+let buttonsA = document.querySelectorAll(".pressA");
+let buttonsB = document.querySelectorAll(".pressB");
+let activeB = document.getElementsByClassName("pressB active");
+let alertText = document.getElementsByClassName("alertLift");
 
 class Lift {
-  constructor(floor, reqFloor, direction) {
+  constructor(floor, reqFloor, direction, target) {
     this.floor = floor;
     this.reqFloor = reqFloor;
     this.direction = direction;
+    this.target = target;
     this.handlePanelA();
     this.handlePanelB();
     this.arrowDown();
@@ -27,6 +33,7 @@ class Lift {
       elevatorA.floor = reqFloor;
       elevatorA.direction = "up";
       elevatorB.direction = "idle";
+      this.btnsDisplayA(reqFloor);
       this.handleDisplay(displayAtext, reqFloor);
       displayBtext.classList.remove("active");
 
@@ -43,7 +50,7 @@ class Lift {
       elevatorA.floor = reqFloor;
       elevatorA.direction = "down";
       elevatorB.direction = "idle";
-
+      this.btnsDisplayA(reqFloor);
       this.handleDisplay(displayAtext, reqFloor);
       displayBtext.classList.remove("active");
 
@@ -60,7 +67,10 @@ class Lift {
       elevatorB.floor = reqFloor;
       elevatorB.direction = "down";
       elevatorA.direction = "idle";
+      this.btnsDisplayB(reqFloor);
+
       this.handleDisplay(displayBtext, reqFloor);
+
       displayAtext.classList.remove("active");
 
       alert(
@@ -75,6 +85,7 @@ class Lift {
       elevatorB.floor = reqFloor;
       elevatorB.direction = "up";
       elevatorA.direction = "idle";
+      this.btnsDisplayB(reqFloor);
       this.handleDisplay(displayBtext, reqFloor);
       displayAtext.classList.remove("active");
 
@@ -112,7 +123,6 @@ class Lift {
   };
 
   handlePanelA = target => {
-    let buttonsA = document.querySelectorAll(".pressA");
     buttonsA.forEach(btn => {
       btn.addEventListener("click", () => {
         let activeA = document.getElementsByClassName("pressA active");
@@ -141,32 +151,30 @@ class Lift {
     });
   };
 
-  handlePanelB = target => {
-    let buttonsB = document.querySelectorAll(".pressB");
+  handlePanelB = reqFloor => {
     buttonsB.forEach(btn => {
       btn.addEventListener("click", () => {
-        target = btn.innerText;
-        let activeB = document.getElementsByClassName("pressB active");
+        reqFloor = Number(btn.innerText);
 
-        if (target > elevatorB.floor) {
+        if (reqFloor > elevatorB.floor) {
           elevatorB.direction = "up";
           elevatorA.direction = "idle";
-          elevatorB.floor = target;
+          elevatorB.floor = reqFloor;
 
           return;
         }
 
-        if (target < elevatorB.floor) {
+        if (reqFloor < elevatorB.floor) {
           elevatorB.direction = "down";
           elevatorA.direction = "idle";
-          elevatorB.floor = target;
+          elevatorB.floor = reqFloor;
           return;
         }
 
         activeB[0].classList.remove("active");
         btn.classList.add("active");
 
-        this.handleDisplay(displayBtext, target);
+        this.handleDisplay(displayBtext, reqFloor);
         this.handleDirectionUp();
         this.handleDirectionDown();
       });
@@ -192,7 +200,25 @@ class Lift {
       }
     });
   };
+
+  btnsDisplayA = reqFloor => {
+    buttonsA.forEach(btn => {
+      if (reqFloor == btn.innerText) {
+        activeA[0].classList.remove("active");
+        btn.classList.add("active");
+      }
+    });
+  };
+
+  btnsDisplayB = reqFloor => {
+    buttonsB.forEach(btn => {
+      if (reqFloor == btn.innerText) {
+        activeB[0].classList.remove("active");
+        btn.classList.add("active");
+      }
+    });
+  };
 }
 
-elevatorA = new Lift(0, 0, "idle");
-elevatorB = new Lift(6, 0, "idle");
+elevatorA = new Lift(0, 0, "idle", 0);
+elevatorB = new Lift(6, 0, "idle", 6);
