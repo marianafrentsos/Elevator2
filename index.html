@@ -25,21 +25,21 @@
     <div class="container mt-4">
       <div class="elevatorsContainer text-center">
         <div class="elevatorA">
-          <h4 id = "displayA">This elevator is at floor 0</h4>
-          <div class = "elevatorBtns m-2">
-          <button class="pressA">6</button>
-          <button class="pressA">5</button>
-          <button class="pressA">4</button>
-          <button class="pressA">3</button>
-          <button class="pressA">2</button>
-          <button class="pressA">1</button>
-          <button class="pressA">0</button>
-        </div>
+          <h4 id="displayA">This elevator is on floor 0</h4>
+          <div class="elevatorBtns m-2">
+            <button class="pressA active">6</button>
+            <button class="pressA">5</button>
+            <button class="pressA">4</button>
+            <button class="pressA">3</button>
+            <button class="pressA">2</button>
+            <button class="pressA">1</button>
+            <button class="pressA">0</button>
+          </div>
         </div>
         <div class="elevatorB text-center">
-            <h4 id = "displayB">This elevator is at floor 6</h4>
-            <div class = "elevatorBtns m-2">
-            <button class="pressB">6</button>
+          <h4 id="displayB">This elevator is on floor 6</h4>
+          <div class="elevatorBtns m-2">
+            <button class="pressB active">6</button>
             <button class="pressB">5</button>
             <button class="pressB">4</button>
             <button class="pressB">3</button>
@@ -48,83 +48,82 @@
             <button class="pressB">0</button>
           </div>
         </div>
-        
-  
-      <div class="floorsContainer text-white">
-        <div class="arrowsContainer mt-2">
-          <i class="fas fa-arrow-down m-2"></i>
-          <i class="fas fa-arrow-up m-2"></i>
+
+        <div class="floorsContainer text-white">
+          <div class="arrowsContainer mt-2">
+              <i class="fas fa-arrow-down showDown m-2"></i>
+              <i class="fas fa-arrow-up m-2"></i>
+            </div>
+
+            <div class="floors">
+              <div class="text-center">
+                6
+                <button class="btn down" value="6">
+                  <i class="fas fa-caret-down mb-1"></i>
+                </button>
+              </div>
+
+              <div>
+                5
+                <button class="btn up" value="5">
+                  <i class="fas fa-caret-up mb-1"></i>
+                </button>
+                <button class="btn down" value="5">
+                  <i class="fas fa-caret-down mb-1"></i>
+                </button>
+              </div>
+
+              <div>
+                4
+                <button class="btn up" value="4">
+                  <i class="fas fa-caret-up mb-1"></i>
+                </button>
+                <button class="btn down" value="4">
+                  <i class="fas fa-caret-down mb-1"></i>
+                </button>
+              </div>
+
+              <div>
+                3
+                <button class="btn up" value="3">
+                  <i class="fas fa-caret-up mb-1"></i>
+                </button>
+                <button class="btn down" value="3">
+                  <i class="fas fa-caret-down mb-1"></i>
+                </button>
+              </div>
+
+              <div>
+                2
+                <button class="btn up" value="2">
+                  <i class="fas fa-caret-up mb-1"></i>
+                </button>
+                <button class="btn down" value="2">
+                  <i class="fas fa-caret-down mb-1"></i>
+                </button>
+              </div>
+
+              <div>
+                1
+                <button class="btn up" value="1">
+                  <i class="fas fa-caret-up mb-1"></i>
+                </button>
+                <button class="btn down" value="1">
+                  <i class="fas fa-caret-down mb-1"></i>
+                </button>
+              </div>
+
+              <div class="text-center">
+                0
+                <button class="btn up" value="0">
+                  <i class="fas fa-caret-up mb-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="floors">
-          <div class="text-center">
-            6
-            <button class="btn down" value="6">
-              <i class="fas fa-caret-down mb-1"></i>
-            </button>
-          </div>
-
-          <div>
-            5
-            <button class="btn up" value="5">
-              <i class="fas fa-caret-up mb-1"></i>
-            </button>
-            <button class="btn down" value="5">
-              <i class="fas fa-caret-down mb-1"></i>
-            </button>
-          </div>
-
-          <div>
-            4
-            <button class="btn up" value="4">
-              <i class="fas fa-caret-up mb-1"></i>
-            </button>
-            <button class="btn down" value="4">
-              <i class="fas fa-caret-down mb-1"></i>
-            </button>
-          </div>
-
-          <div>
-            3
-            <button class="btn up" value="3">
-              <i class="fas fa-caret-up mb-1"></i>
-            </button>
-            <button class="btn down" value="3">
-              <i class="fas fa-caret-down mb-1"></i>
-            </button>
-          </div>
-
-          <div>
-            2
-            <button class="btn up" value="2">
-              <i class="fas fa-caret-up mb-1"></i>
-            </button>
-            <button class="btn down" value="2">
-              <i class="fas fa-caret-down mb-1"></i>
-            </button>
-          </div>
-
-          <div>
-            1
-            <button class="btn up" value="1">
-              <i class="fas fa-caret-up mb-1"></i>
-            </button>
-            <button class="btn down" value="1">
-              <i class="fas fa-caret-down mb-1"></i>
-            </button>
-          </div>
-
-          <div class="text-center">
-            0
-            <button class="btn up" value="0">
-              <i class="fas fa-caret-up mb-1"></i>
-            </button>
-          </div>
-        </div>
-      </div>
       </div>
     </div>
-</div>
 
     <script src="index.js"></script>
   </body>
