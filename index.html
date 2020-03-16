@@ -22,10 +22,13 @@
     <title>Elevator</title>
   </head>
   <body>
-    <div class="container mt-4">
+    <div class="container">
+      <h2 class = "text-center m-4 p-2">Elevators</h2>
       <div class="elevatorsContainer text-center">
         <div class="elevatorA">
-          <h4 id="displayA">This elevator is on floor 0</h4>
+          <h4 id="displayA">Elevator A</h4>
+          <h4>Floor: <span id="displayAFloor">0</span></h4>
+
           <div class="elevatorBtns m-2">
             <button class="pressA ">6</button>
             <button class="pressA">5</button>
@@ -37,7 +40,8 @@
           </div>
         </div>
         <div class="elevatorB text-center">
-          <h4 id="displayB">This elevator is on floor 6</h4>
+          <h4 id="displayB">Elevator B</h4>   
+         <h4 >Floor: <span id="displayBFloor">6</span></h4>
           <div class="elevatorBtns m-2">
             <button class="pressB active">6</button>
             <button class="pressB">5</button>
@@ -51,8 +55,9 @@
 
         <div class="floorsContainer text-white">
           <div class="arrowsContainer mt-2">
-              <i class="fas fa-arrow-down showDown m-2"></i>
-              <i class="fas fa-arrow-up m-2"></i>
+            <h3 class="mt-1">Call Elevator</h3>
+              <i class="fas fa-arrow-down ml-2 mt-5 p-2"></i>
+              <i class="fas fa-arrow-up ml-2 mt-5 p-2"></i>
             </div>
 
             <div class="floors">

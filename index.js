@@ -1,19 +1,17 @@
 let pointDown = document.querySelectorAll(".fa-arrow-down");
 let pointUp = document.querySelectorAll(".fa-arrow-up");
-let displayAtext = document.getElementById("displayA");
-let displayBtext = document.getElementById("displayB");
+let displayAtext = document.getElementById("displayAFloor");
+let displayBtext = document.getElementById("displayBFloor");
 let activeA = document.getElementsByClassName("pressA active");
 let buttonsA = document.querySelectorAll(".pressA");
 let buttonsB = document.querySelectorAll(".pressB");
 let activeB = document.getElementsByClassName("pressB active");
-let alertText = document.getElementsByClassName("alertLift");
 
 class Lift {
-  constructor(floor, reqFloor, direction, target) {
+  constructor(floor, reqFloor, direction) {
     this.floor = floor;
     this.reqFloor = reqFloor;
     this.direction = direction;
-    this.target = target;
     this.handlePanelA();
     this.handlePanelB();
     this.arrowDown();
@@ -21,8 +19,8 @@ class Lift {
   }
 
   handleDisplay = (display, currentFloor) => {
-    display.innerText = "This elevator is on floor " + currentFloor;
-    display.classList.add("active");
+    display.innerText = currentFloor;
+    display.classList.add("activeFloorDisplay");
   };
 
   handleArrows = reqFloor => {
@@ -33,10 +31,9 @@ class Lift {
       elevatorA.floor = reqFloor;
       elevatorA.direction = "up";
       elevatorB.direction = "idle";
-      this.btnsDisplayA(reqFloor);
       this.handleDisplay(displayAtext, reqFloor);
       displayBtext.classList.remove("active");
-
+      this.panelButtonsDisplayA(reqFloor);
       alert(
         "Elevator A is going " +
           `${elevatorA.direction}` +
@@ -46,13 +43,13 @@ class Lift {
       return;
     }
 
-    if (reqFloor < elevatorA.floor && distanceA < distanceB) {
+    if (reqFloor < elevatorA.floor && distanceA <= distanceB) {
       elevatorA.floor = reqFloor;
       elevatorA.direction = "down";
       elevatorB.direction = "idle";
-      this.btnsDisplayA(reqFloor);
       this.handleDisplay(displayAtext, reqFloor);
       displayBtext.classList.remove("active");
+      this.panelButtonsDisplayA(reqFloor);
 
       alert(
         "Elevator A is going " +
@@ -63,15 +60,13 @@ class Lift {
       return;
     }
 
-    if (reqFloor < elevatorB.floor && distanceA > distanceB) {
+    if (reqFloor < elevatorB.floor && distanceA >= distanceB) {
       elevatorB.floor = reqFloor;
       elevatorB.direction = "down";
       elevatorA.direction = "idle";
-      this.btnsDisplayB(reqFloor);
-
       this.handleDisplay(displayBtext, reqFloor);
-
       displayAtext.classList.remove("active");
+      this.panelButtonsDisplayB(reqFloor);
 
       alert(
         "Elevator B is going " +
@@ -85,9 +80,9 @@ class Lift {
       elevatorB.floor = reqFloor;
       elevatorB.direction = "up";
       elevatorA.direction = "idle";
-      this.btnsDisplayB(reqFloor);
       this.handleDisplay(displayBtext, reqFloor);
       displayAtext.classList.remove("active");
+      this.panelButtonsDisplayB(reqFloor);
 
       alert(
         "Elevator B is going " +
@@ -125,8 +120,6 @@ class Lift {
   handlePanelA = target => {
     buttonsA.forEach(btn => {
       btn.addEventListener("click", () => {
-        let activeA = document.getElementsByClassName("pressA active");
-
         target = btn.innerText;
         if (target > elevatorA.floor) {
           elevatorA.direction = "up";
@@ -141,40 +134,45 @@ class Lift {
           elevatorA.floor = target;
           return;
         }
+        const handleClassActive = () => {
+          activeA[0].classList.remove("active");
+          btn.classList.add("active");
+        };
+
+        handleClassActive();
         this.handleDisplay(displayAtext, target);
         this.handleDirectionUp();
         this.handleDirectionDown();
-
-        activeA[0].classList.remove("active");
-        btn.classList.add("active");
       });
     });
   };
 
-  handlePanelB = reqFloor => {
+  handlePanelB = target => {
     buttonsB.forEach(btn => {
       btn.addEventListener("click", () => {
-        reqFloor = Number(btn.innerText);
+        target = btn.innerText;
 
-        if (reqFloor > elevatorB.floor) {
+        if (target > elevatorB.floor) {
           elevatorB.direction = "up";
           elevatorA.direction = "idle";
-          elevatorB.floor = reqFloor;
-
+          elevatorB.floor = target;
           return;
         }
 
-        if (reqFloor < elevatorB.floor) {
+        if (target < elevatorB.floor) {
           elevatorB.direction = "down";
           elevatorA.direction = "idle";
-          elevatorB.floor = reqFloor;
+          elevatorB.floor = target;
           return;
         }
 
-        activeB[0].classList.remove("active");
-        btn.classList.add("active");
+        const handleClassActive = () => {
+          activeB[0].classList.remove("active");
+          btn.classList.add("active");
+        };
 
-        this.handleDisplay(displayBtext, reqFloor);
+        handleClassActive();
+        this.handleDisplay(displayBtext, target);
         this.handleDirectionUp();
         this.handleDirectionDown();
       });
@@ -201,24 +199,23 @@ class Lift {
     });
   };
 
-  btnsDisplayA = reqFloor => {
-    buttonsA.forEach(btn => {
-      if (reqFloor == btn.innerText) {
-        activeA[0].classList.remove("active");
-        btn.classList.add("active");
+  panelButtonsDisplayB = reqFloor => {
+    activeB[0].classList.remove("active");
+    buttonsB.forEach(button => {
+      if (button.innerText == reqFloor) {
+        button.classList.add("active");
       }
     });
   };
-
-  btnsDisplayB = reqFloor => {
-    buttonsB.forEach(btn => {
-      if (reqFloor == btn.innerText) {
-        activeB[0].classList.remove("active");
-        btn.classList.add("active");
+  panelButtonsDisplayA = reqFloor => {
+    activeA[0].classList.remove("active");
+    buttonsA.forEach(button => {
+      if (button.innerText == reqFloor) {
+        button.classList.add("active");
       }
     });
   };
 }
 
-elevatorA = new Lift(0, 0, "idle", 0);
-elevatorB = new Lift(6, 0, "idle", 6);
+elevatorA = new Lift(0, 0, "idle");
+elevatorB = new Lift(6, 0, "idle");
