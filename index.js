@@ -28,73 +28,83 @@ class Lift {
     let distanceB = Math.abs(elevatorB.floor - reqFloor);
 
     if (reqFloor > elevatorA.floor && distanceA <= distanceB) {
-      elevatorA.floor = reqFloor;
       elevatorA.direction = "up";
       elevatorB.direction = "idle";
-      this.handleDisplay(displayAtext, reqFloor);
-      displayBtext.classList.remove("active");
-      this.panelButtonsDisplayA(reqFloor);
-      alert(
-        "Elevator A is going " +
-          `${elevatorA.direction}` +
-          " to floor " +
-          `${reqFloor}`
-      );
+
+      this.handleDirectionDown();
+      this.handleDirectionUp();
+      let countdown = setInterval(() => {
+        if (elevatorA.floor > reqFloor) {
+          elevatorA.floor = reqFloor;
+          clearInterval(countdown);
+        } else {
+          this.panelButtonsDisplayA(elevatorA.floor);
+          this.handleDisplay(displayAtext, elevatorA.floor);
+          elevatorA.floor++;
+        }
+      }, 1000);
       return;
     }
 
     if (reqFloor < elevatorA.floor && distanceA <= distanceB) {
-      elevatorA.floor = reqFloor;
       elevatorA.direction = "down";
       elevatorB.direction = "idle";
-      this.handleDisplay(displayAtext, reqFloor);
-      displayBtext.classList.remove("active");
-      this.panelButtonsDisplayA(reqFloor);
+      this.handleDirectionDown();
+      this.handleDirectionUp();
 
-      alert(
-        "Elevator A is going " +
-          `${elevatorA.direction}` +
-          " to floor " +
-          `${reqFloor}`
-      );
+      let countdown = setInterval(() => {
+        if (elevatorA.floor === reqFloor) {
+          elevatorA.floor = reqFloor;
+          this.panelButtonsDisplayA(elevatorA.floor);
+          this.handleDisplay(displayAtext, elevatorA.floor);
+          clearInterval(countdown);
+        } else {
+          this.panelButtonsDisplayA(elevatorA.floor);
+          this.handleDisplay(displayAtext, elevatorA.floor);
+          elevatorA.floor--;
+        }
+      }, 1000);
+
       return;
     }
 
     if (reqFloor < elevatorB.floor && distanceA >= distanceB) {
-      elevatorB.floor = reqFloor;
       elevatorB.direction = "down";
       elevatorA.direction = "idle";
-      this.handleDisplay(displayBtext, reqFloor);
-      displayAtext.classList.remove("active");
-      this.panelButtonsDisplayB(reqFloor);
 
-      alert(
-        "Elevator B is going " +
-          `${elevatorB.direction}` +
-          " to floor " +
-          `${reqFloor}`
-      );
+      let countdown = setInterval(() => {
+        if (elevatorB.floor === reqFloor) {
+          elevatorB.floor = reqFloor;
+          this.panelButtonsDisplayB(elevatorB.floor);
+          this.handleDisplay(displayBtext, elevatorB.floor);
+          clearInterval(countdown);
+        } else {
+          this.panelButtonsDisplayB(elevatorB.floor);
+          this.handleDisplay(displayBtext, elevatorB.floor);
+          elevatorB.floor--;
+        }
+      }, 1000);
+
       return;
     }
     if (reqFloor > elevatorB.floor && distanceA >= distanceB) {
-      elevatorB.floor = reqFloor;
       elevatorB.direction = "up";
       elevatorA.direction = "idle";
-      this.handleDisplay(displayBtext, reqFloor);
-      displayAtext.classList.remove("active");
-      this.panelButtonsDisplayB(reqFloor);
 
-      alert(
-        "Elevator B is going " +
-          `${elevatorB.direction}` +
-          " to floor " +
-          `${reqFloor}`
-      );
+      this.handleDirectionDown();
+      this.handleDirectionUp();
+      let countdown = setInterval(() => {
+        if (elevatorB.floor > reqFloor) {
+          elevatorB.floor = reqFloor;
+          clearInterval(countdown);
+        } else {
+          this.panelButtonsDisplayB(elevatorB.floor);
+          this.handleDisplay(displayBtext, elevatorB.floor);
+          elevatorB.floor++;
+        }
+      }, 1000);
       return;
     }
-
-    this.handleDirectionDown();
-    this.handleDirectionUp();
   };
 
   arrowDown = reqFloor => {
@@ -201,19 +211,23 @@ class Lift {
 
   panelButtonsDisplayB = reqFloor => {
     activeB[0].classList.remove("active");
-    buttonsB.forEach(button => {
-      if (button.innerText == reqFloor) {
-        button.classList.add("active");
-      }
-    });
+    setTimeout(() => {
+      buttonsB.forEach(button => {
+        if (button.innerText == reqFloor) {
+          button.classList.add("active");
+        }
+      });
+    }, 0);
   };
-  panelButtonsDisplayA = reqFloor => {
+  panelButtonsDisplayA = floor => {
     activeA[0].classList.remove("active");
-    buttonsA.forEach(button => {
-      if (button.innerText == reqFloor) {
-        button.classList.add("active");
-      }
-    });
+    setTimeout(() => {
+      buttonsA.forEach(button => {
+        if (button.innerText == floor) {
+          button.classList.add("active");
+        }
+      });
+    }, 0);
   };
 }
 
